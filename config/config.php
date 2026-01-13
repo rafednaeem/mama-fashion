@@ -5,7 +5,7 @@
 // Adjust these for your local XAMPP setup if needed.
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'mama_fashion');
-require_once __DIR__ . '/database_supabase.php'; // Make sure this matches your phpMyAdmin database name.
+require_once __DIR__ . '/database.php'; // Make sure this matches your phpMyAdmin database name.
 define('DB_USER', 'root');
 define('DB_PASS', ''); // Default XAMPP MySQL password is empty.
 
