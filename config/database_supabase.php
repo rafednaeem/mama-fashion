@@ -2,21 +2,14 @@
 // config/database.php
 // Updated for Supabase PostgreSQL connection
 
-// Get environment variables from Vercel
-$host = $_ENV['POSTGRES_HOST'] ?? 'localhost';
-$database = $_ENV['POSTGRES_DATABASE'] ?? 'postgres';
-$user = $_ENV['POSTGRES_USER'] ?? 'postgres';
-$password = $_ENV['POSTGRES_PASSWORD'] ?? '';
-$port = $_ENV['POSTGRES_PORT'] ?? '5432';
-
-// Build connection string
-$dsn = "pgsql:host=$host;port=$port;dbname=$database;sslmode=require";
+// Use the full connection string from Supabase
+$connectionString = $_ENV['POSTGRES_URL'] ?? 
+    "postgres://postgres.eydancfwhwwdygpeivol:uNN1hJ4y4GjFbTxK@aws-1-us-east-1.pooler.supabase.com:6543/postgres?sslmode=require";
 
 try {
-    $pdo = new PDO($dsn, $user, $password, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]);
+    $pdo = new PDO($connectionString);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die('Database connection failed: ' . $e->getMessage());
 }
